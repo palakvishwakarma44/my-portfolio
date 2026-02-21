@@ -1,0 +1,730 @@
+/* ========================================
+   QUANTUM DEVELOPER PORTFOLIO - DESIGN SYSTEM
+   ======================================== */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ========================================
+   CSS CUSTOM PROPERTIES - ROOT VARIABLES
+   ======================================== */
+
+:root {
+  /* ===== Premium HSL Color Palette ===== */
+  --color-bg-primary: hsl(240, 10%, 4%);
+  --color-bg-secondary: hsl(240, 10%, 6%);
+  --color-bg-tertiary: hsl(240, 10%, 8%);
+
+  --color-purple: hsl(270, 95%, 65%);
+  --color-purple-light: hsl(270, 100%, 75%);
+  --color-purple-dark: hsl(270, 95%, 45%);
+
+  --color-cyan: hsl(190, 100%, 50%);
+  --color-cyan-light: hsl(190, 100%, 70%);
+  --color-cyan-dark: hsl(190, 100%, 40%);
+
+  --color-magenta: hsl(330, 95%, 60%);
+  --color-magenta-light: hsl(330, 100%, 75%);
+  --color-magenta-dark: hsl(330, 95%, 45%);
+
+  --color-blue-electric: hsl(210, 100%, 55%);
+  --color-blue-light: hsl(210, 100%, 70%);
+
+  --color-text-primary: hsla(0, 0%, 100%, 1);
+  --color-text-secondary: hsla(0, 0%, 100%, 0.85);
+  --color-text-muted: hsla(0, 0%, 100%, 0.65);
+
+  /* ===== Holographic Gradients ===== */
+  --gradient-cosmic: linear-gradient(135deg,
+      var(--color-purple) 0%,
+      var(--color-blue-electric) 50%,
+      var(--color-cyan) 100%);
+  --gradient-neon: linear-gradient(90deg,
+      var(--color-purple-light) 0%,
+      var(--color-cyan-light) 50%,
+      var(--color-magenta-light) 100%);
+
+  /* Subtle Shimmer Overlay */
+  --gradient-shimmer: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0) 100%);
+
+  /* ===== Glass 2.0 Properties ===== */
+  --glass-bg: hsla(0, 0%, 100%, 0.03);
+  --glass-bg-hover: hsla(0, 0%, 100%, 0.07);
+  --glass-border: hsla(0, 0%, 100%, 0.1);
+  --glass-blur: 40px;
+  --glass-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+
+  /* ===== Simple Spacing System ===== */
+  --spacing-xs: 0.3rem;
+  --spacing-sm: 0.6rem;
+  --spacing-md: 0.9rem;
+  --spacing-lg: 1.2rem;
+  --spacing-xl: 1.6rem;
+  --spacing-2xl: 2rem;
+  --spacing-3xl: 2.8rem;
+
+  /* ===== Original Typography Scale ===== */
+  --font-heading: 'Orbitron', 'Inter', sans-serif;
+  --font-subheading: 'Poppins', 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --font-size-xs: 0.65rem;
+  --font-size-sm: 0.75rem;
+  --font-size-base: 0.85rem;
+  --font-size-lg: 0.95rem;
+  --font-size-xl: 1.05rem;
+  --font-size-2xl: 1.15rem;
+  --font-size-3xl: 1.35rem;
+  --font-size-4xl: 1.65rem;
+  --font-size-5xl: 2rem;
+  --font-size-6xl: 2.5rem;
+
+  /* ===== Border Radius ===== */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ===== Z-Index Layers ===== */
+  --z-base: 1;
+  --z-overlay: 10;
+  --z-navbar: 100;
+  --z-cursor: 9999;
+
+  /* ===== Transitions ===== */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  --transition-cubic: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ===== Shadows ===== */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-neon: 0 0 20px hsla(190, 100%, 50%, 0.2);
+}
+
+/* ========================================
+   THEME VARIANTS
+   ======================================== */
+
+[data-theme="aurora"] {
+  --gradient-cosmic: linear-gradient(135deg, #10b981 0%, #3b82f6 50%, #8b5cf6 100%);
+}
+
+[data-theme="synthwave"] {
+  --gradient-cosmic: linear-gradient(135deg, #f97316 0%, #ec4899 50%, #8b5cf6 100%);
+}
+
+[data-theme="matrix"] {
+  --gradient-cosmic: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+}
+
+/* ========================================
+   RESET & BASE STYLES
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Mesh Gradient Background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 0% 0%, hsla(270, 95%, 65%, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 100% 0%, hsla(190, 100%, 50%, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, hsla(330, 95%, 60%, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 0% 100%, hsla(210, 100%, 55%, 0.25) 0%, transparent 50%);
+  background-size: 200% 200%;
+  z-index: -3;
+  animation: meshGradient 20s ease infinite;
+  pointer-events: none;
+}
+
+@keyframes meshGradient {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+h1 {
+  font-size: var(--font-size-5xl);
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 {
+  font-size: var(--font-size-4xl);
+}
+
+h3 {
+  font-size: var(--font-size-3xl);
+  font-family: var(--font-subheading);
+}
+
+p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-base);
+}
+
+/* ========================================
+   GLASSMORPHISM UTILITY CLASSES
+   ======================================== */
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-hover {
+  transition: all var(--transition-base);
+}
+
+.glass-hover:hover {
+  background: var(--glass-bg-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-neon);
+  transform: translateY(-2px);
+}
+
+/* Gradient Borders */
+.gradient-border {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--radius-lg);
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: var(--gradient-cosmic);
+  border-radius: inherit;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ========================================
+   BUTTON STYLES
+   ======================================== */
+
+.btn {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: var(--font-subheading);
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--gradient-cosmic);
+  color: white;
+  box-shadow: var(--shadow-neon);
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-neon-hover);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  color: var(--color-text-primary);
+  border: 1px solid var(--glass-border);
+}
+
+.btn-glass:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--color-cyan);
+}
+
+/* Ripple Effect */
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 0.5s, opacity 0.3s;
+}
+
+.btn:active::after {
+  opacity: 1;
+  transform: scale(2);
+  transition: 0s;
+}
+
+/* ========================================
+   CUSTOM SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-cosmic);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-neon);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-purple) var(--color-bg-secondary);
+}
+
+/* ========================================
+   ANIMATION KEYFRAMES
+   ======================================== */
+
+/* Gradient Shift */
+@keyframes gradientShift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Fade In Up */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide In Left */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide In Right */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale In */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Rotate In */
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+/* Float */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Levitate */
+@keyframes levitate {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotateX(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotateX(5deg);
+  }
+}
+
+/* Pulse Glow */
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.6), 0 0 60px rgba(6, 182, 212, 0.4);
+  }
+}
+
+/* Morph */
+@keyframes morph {
+
+  0%,
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+}
+
+/* Wave Motion */
+@keyframes wave {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+
+  50% {
+    transform: translateX(10px) translateY(-10px);
+  }
+
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+/* Glitch Effect */
+@keyframes glitch {
+
+  0%,
+  100% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, 2px);
+  }
+
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+/* Particle Float */
+@keyframes particleFloat {
+
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate(10px, -10px) rotate(90deg);
+  }
+
+  50% {
+    transform: translate(0, -20px) rotate(180deg);
+  }
+
+  75% {
+    transform: translate(-10px, -10px) rotate(270deg);
+  }
+}
+
+/* Spin */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Glow */
+@keyframes glow {
+
+  0%,
+  100% {
+    filter: brightness(1) drop-shadow(0 0 10px var(--color-purple));
+  }
+
+  50% {
+    filter: brightness(1.2) drop-shadow(0 0 20px var(--color-cyan));
+  }
+}
+
+/* Typing Cursor */
+@keyframes blink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+/* Text Gradients */
+.text-gradient {
+  background: var(--gradient-cosmic);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-neon {
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animations */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-levitate {
+  animation: levitate 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.animate-morph {
+  animation: morph 8s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+.animate-spin {
+  animation: spin 2s linear infinite;
+}
+
+/* 3D Transform */
+.transform-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Hover Effects */
+.hover-lift {
+  transition: transform var(--transition-base);
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+.hover-scale {
+  transition: transform var(--transition-base);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+/* Section Padding */
+.section {
+  padding: var(--spacing-lg) 0;
+  position: relative;
+}
+
+/* Hide on Mobile */
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  h3 {
+    font-size: var(--font-size-xl);
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus States */
+*:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 4px;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-purple);
+  color: white;
+}

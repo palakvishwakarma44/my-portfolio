@@ -1,0 +1,492 @@
+/* ========================================
+   ADVANCED SCROLL ANIMATIONS
+   ======================================== */
+
+/* Reveal animations triggered by Intersection Observer */
+.reveal {
+    opacity: 0;
+}
+
+.reveal.active {
+    opacity: 1;
+    animation: fadeInUp 0.8s var(--transition-cubic) forwards;
+}
+
+.reveal-left.active {
+    animation: slideInLeft 0.8s var(--transition-cubic) forwards;
+}
+
+.reveal-right.active {
+    animation: slideInRight 0.8s var(--transition-cubic) forwards;
+}
+
+.reveal-scale.active {
+    animation: scaleIn 0.6s var(--transition-cubic) forwards;
+}
+
+.reveal-rotate.active {
+    animation: rotateIn 0.8s var(--transition-cubic) forwards;
+}
+
+/* Stagger animations for children */
+.stagger>* {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.stagger.active>* {
+    animation: fadeInUp 0.6s var(--transition-cubic) forwards;
+}
+
+.stagger.active>*:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.stagger.active>*:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.stagger.active>*:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.stagger.active>*:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.stagger.active>*:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.stagger.active>*:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+/* ========================================
+   CARD ANIMATIONS
+   ======================================== */
+
+/* Card Flip */
+.card-flip {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.card-flip.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-flip-front,
+.card-flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.card-flip-back {
+    transform: rotateY(180deg);
+}
+
+/* 3D Tilt Effect */
+.card-tilt {
+    transition: transform var(--transition-base);
+    transform-style: preserve-3d;
+}
+
+.card-tilt:hover {
+    transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) scale3d(1.05, 1.05, 1.05);
+}
+
+/* ========================================
+   BUTTON EFFECTS
+   ======================================== */
+
+/* Magnetic Button */
+.btn-magnetic {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Ripple Container */
+.ripple-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(0);
+    animation: rippleEffect 0.6s ease-out;
+}
+
+@keyframes rippleEffect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ========================================
+   TEXT EFFECTS
+   ======================================== */
+
+/* Typewriter Effect */
+.typewriter {
+    overflow: hidden;
+    border-right: 3px solid var(--color-cyan);
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+/* Split Text Animation */
+.split-text span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards;
+}
+
+.split-text span:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.split-text span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.split-text span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.split-text span:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.split-text span:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+/* Glitch Text */
+.glitch {
+    position: relative;
+    animation: glitch 1s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--color-cyan);
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--color-magenta);
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip: rect(26px, 9999px, 78px, 0);
+    }
+
+    20% {
+        clip: rect(90px, 9999px, 23px, 0);
+    }
+
+    40% {
+        clip: rect(43px, 9999px, 56px, 0);
+    }
+
+    60% {
+        clip: rect(12px, 9999px, 91px, 0);
+    }
+
+    80% {
+        clip: rect(77px, 9999px, 34px, 0);
+    }
+
+    100% {
+        clip: rect(58px, 9999px, 67px, 0);
+    }
+}
+
+/* ========================================
+   SVG PATH ANIMATIONS
+   ======================================== */
+
+/* Draw SVG Path */
+.svg-draw path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawPath 2s ease forwards;
+}
+
+@keyframes drawPath {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* ========================================
+   LOADING ANIMATIONS
+   ======================================== */
+
+/* Skeleton Loader */
+.skeleton {
+    background: linear-gradient(90deg,
+            var(--color-bg-secondary) 0%,
+            var(--color-bg-tertiary) 50%,
+            var(--color-bg-secondary) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Spinner */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--glass-border);
+    border-top-color: var(--color-cyan);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* ========================================
+   PROGRESS INDICATORS
+   ======================================== */
+
+/* Circular Progress */
+.circular-progress {
+    transform: rotate(-90deg);
+}
+
+.circular-progress circle {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+.circular-progress .progress-bg {
+    stroke: var(--glass-border);
+}
+
+.circular-progress .progress-fill {
+    stroke: url(#gradient);
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    animation: progressFill 2s ease forwards;
+}
+
+@keyframes progressFill {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Linear Progress */
+.linear-progress {
+    height: 4px;
+    background: var(--glass-border);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.linear-progress-bar {
+    height: 100%;
+    background: var(--gradient-cosmic);
+    border-radius: var(--radius-full);
+    animation: progressSlide 1.5s ease forwards;
+}
+
+@keyframes progressSlide {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* ========================================
+   PARALLAX EFFECTS
+   ======================================== */
+
+.parallax-layer {
+    transition: transform 0.1s ease-out;
+}
+
+.parallax-slow {
+    transform: translateY(calc(var(--scroll-progress) * -20px));
+}
+
+.parallax-medium {
+    transform: translateY(calc(var(--scroll-progress) * -40px));
+}
+
+.parallax-fast {
+    transform: translateY(calc(var(--scroll-progress) * -60px));
+}
+
+/* ========================================
+   HOVER MICRO-INTERACTIONS
+   ======================================== */
+
+.hover-glow {
+    transition: all var(--transition-base);
+}
+
+.hover-glow:hover {
+    filter: drop-shadow(0 0 20px currentColor);
+}
+
+.hover-rotate {
+    transition: transform var(--transition-base);
+}
+
+.hover-rotate:hover {
+    transform: rotate(360deg);
+}
+
+.hover-bounce:hover {
+    animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    25% {
+        transform: translateY(-10px);
+    }
+
+    50% {
+        transform: translateY(0);
+    }
+
+    75% {
+        transform: translateY(-5px);
+    }
+}
+
+/* ========================================
+   PARTICLE EFFECTS
+   ======================================== */
+
+.particle {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.6;
+    animation: particleFloat 3s infinite ease-in-out;
+}
+
+/* ========================================
+   TOOLTIP
+   ======================================== */
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+.tooltip:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px);
+}
+
+/* ========================================
+   MODALS & OVERLAYS
+   ======================================== */
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: var(--z-overlay);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: calc(var(--z-overlay) + 1);
+    animation: scaleIn 0.4s var(--transition-cubic);
+}
+
+/* ========================================
+   RESPONSIVE ANIMATIONS
+   ======================================== */
+
+@media (max-width: 768px) {
+
+    /* Reduce animation complexity on mobile for performance */
+    .animate-morph,
+    .animate-pulse-glow,
+    .parallax-layer {
+        animation: none;
+    }
+
+    .card-tilt:hover {
+        transform: scale(1.02);
+    }
+}

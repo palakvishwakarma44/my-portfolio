@@ -1,0 +1,129 @@
+.projects {
+    background: var(--color-bg-secondary);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.project-card {
+    padding: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    transition: all var(--transition-base);
+}
+
+.project-card:hover {
+    box-shadow: 0 0 30px hsla(190, 100%, 50%, 0.1);
+    border-color: var(--color-cyan-light);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+}
+
+.project-title {
+    font-size: var(--font-size-2xl);
+    font-family: var(--font-subheading);
+    color: var(--color-text-primary);
+    flex: 1;
+}
+
+.project-links {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.project-link {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-xl);
+    color: var(--color-text-secondary);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    transition: all var(--transition-base);
+}
+
+.project-link:hover {
+    color: var(--color-cyan);
+    border-color: var(--color-cyan);
+    transform: translateY(-2px) rotate(360deg);
+}
+
+.project-description {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+.project-features {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-md) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.project-features li {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    padding-left: var(--spacing-md);
+    position: relative;
+}
+
+.project-features li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--color-cyan);
+    font-size: var(--font-size-lg);
+}
+
+.project-technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-top: auto;
+}
+
+.tech-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.7rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    font-family: var(--font-subheading);
+    transition: all var(--transition-base);
+}
+
+.tech-tag:hover {
+    border-color: var(--color-cyan);
+    color: var(--color-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px hsla(190, 100%, 50%, 0.2);
+}
+
+.tech-tag svg {
+    font-size: var(--font-size-base);
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}

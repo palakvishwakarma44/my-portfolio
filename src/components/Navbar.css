@@ -1,0 +1,119 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--spacing-md) 0;
+    z-index: var(--z-navbar);
+    transition: all var(--transition-base);
+}
+
+.navbar-scrolled {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo {
+    font-size: var(--font-size-2xl);
+    font-family: var(--font-heading);
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-lg);
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-link {
+    font-family: var(--font-subheading);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-full);
+    transition: all var(--transition-base);
+    position: relative;
+}
+
+.navbar-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 80%;
+    height: 2px;
+    background: var(--gradient-cosmic);
+    transition: transform var(--transition-base);
+}
+
+.navbar-link:hover,
+.navbar-link.active {
+    color: var(--color-text-primary);
+}
+
+.navbar-link:hover::after,
+.navbar-link.active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+.navbar-link.active {
+    color: var(--color-cyan);
+}
+
+.navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-2xl);
+    cursor: pointer;
+    z-index: calc(var(--z-navbar) + 2);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: var(--glass-bg);
+        backdrop-filter: blur(var(--glass-blur));
+        border-left: 1px solid var(--glass-border);
+        flex-direction: column;
+        padding: var(--spacing-3xl) var(--spacing-lg);
+        gap: var(--spacing-md);
+        transition: right var(--transition-base);
+    }
+
+    .navbar-menu-open {
+        right: 0;
+    }
+
+    .navbar-link {
+        font-size: var(--font-size-lg);
+        width: 100%;
+        text-align: left;
+    }
+}
