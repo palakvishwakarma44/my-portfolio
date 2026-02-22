@@ -46,9 +46,9 @@ const Contact = () => {
         e.preventDefault();
         setFormStatus('loading');
 
-        const serviceId = 'service_3h6xg5u';
-        const templateId = 'template_icxq17z';
-        const publicKey = 'EI1jiFXk9ygTxxpIA';
+     const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
         const templateParams = {
             from_name: formData.name,
