@@ -2,12 +2,23 @@ import { useEffect, useState } from 'react';
 import { FiGithub, FiLinkedin, FiMail, FiChevronDown } from 'react-icons/fi';
 import { smoothScrollTo } from '../utils/animations';
 import { useTypewriter } from '../hooks/useTypewriter';
+import dataCube from '../assets/data_cube.png';
 import './Hero.css';
+
 
 const Hero = () => {
     const [nameDisplay, setNameDisplay] = useState('');
     const fullText = "Palak Vishwakarma";
     const [showSubtitle, setShowSubtitle] = useState(false);
+    const [parallax, setParallax] = useState({ x: 0, y: 0 });
+
+    const handleMouseMove = (e) => {
+        const { clientX, clientY } = e;
+        const x = (clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+        const y = (clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+        setParallax({ x: x * 10, y: y * 10 });
+    };
+
 
     const { displayText: subtitleText } = useTypewriter({
         words: [
@@ -43,11 +54,26 @@ const Hero = () => {
     };
 
     return (
-        <section id="home" className="hero">
-            <div className="hero-container container">
+        <section id="home" className="hero" onMouseMove={handleMouseMove}>
+            <div 
+                className="hero-container container"
+                style={{
+                    transform: `perspective(1000px) rotateX(${-parallax.y}deg) rotateY(${parallax.x}deg)`,
+                    transition: 'transform 0.1s ease-out'
+                }}
+            >
+
                 <div className="hero-content">
+                    {/* Technical HUD Elements */}
+                    <div className="hero-hud-decor top-left"></div>
+                    <div className="hero-hud-decor top-right"></div>
+                    <div className="hero-hud-decor bottom-left"></div>
+                    <div className="hero-hud-decor bottom-right"></div>
+                    <div className="hero-scanner-line"></div>
+
                     {/* Morphing Blob Background */}
                     <div className="hero-blob"></div>
+
 
                     {/* Main Content */}
                     <div className="hero-text">
@@ -123,8 +149,9 @@ const Hero = () => {
                     <div className="hero-floating-shapes">
                         <div className="floating-shape shape-1"></div>
                         <div className="floating-shape shape-2"></div>
-                        <div className="floating-shape shape-3"></div>
+                        <img src={dataCube} alt="Data Cube" className="tech-gif-cube" />
                     </div>
+
                 </div>
 
                 {/* Scroll Indicator */}

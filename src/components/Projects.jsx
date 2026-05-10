@@ -1,8 +1,10 @@
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
 import { SiReact, SiJavascript, SiHtml5, SiCss3, SiNodedotjs, SiMongodb, SiExpress, SiGoogle } from 'react-icons/si';
 
+import { useRef, useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import './Projects.css';
+
 
 const Projects = () => {
     const [ref, isVisible] = useScrollReveal({ threshold: 0.1 });
@@ -77,48 +79,7 @@ const Projects = () => {
 
                 <div className={`projects-grid ${isVisible ? 'stagger active' : 'stagger'}`}>
                     {projects.map((project, idx) => (
-                        <div key={idx} className="project-card glass gradient-border hover-lift">
-                            <div className="project-header">
-                                <h3 className="project-title">{project.title}</h3>
-                                <div className="project-links">
-                                    <a
-                                        href={project.github}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="project-link hover-target"
-                                        aria-label="View on GitHub"
-                                    >
-                                        <FiGithub />
-                                    </a>
-                                    <a
-                                        href={project.demo}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="project-link hover-target"
-                                        aria-label="View Live Demo"
-                                    >
-                                        <FiExternalLink />
-                                    </a>
-                                </div>
-                            </div>
-
-                            <p className="project-description">{project.description}</p>
-
-                            <ul className="project-features">
-                                {project.features.map((feature, featureIdx) => (
-                                    <li key={featureIdx}>{feature}</li>
-                                ))}
-                            </ul>
-
-                            <div className="project-technologies">
-                                {project.technologies.map((tech, techIdx) => (
-                                    <div key={techIdx} className="tech-tag" title={tech.name}>
-                                        {tech.icon}
-                                        <span>{tech.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        <ProjectCard key={idx} project={project} />
                     ))}
                 </div>
             </div>
@@ -126,4 +87,55 @@ const Projects = () => {
     );
 };
 
+const ProjectCard = ({ project }) => {
+    const cardRef = useRef(null);
+    const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+    const handleMouseMove = (e) => {
+        if (!cardRef.current) return;
+        const { left, top, width, height } = cardRef.current.getBoundingClientRect();
+        const x = (e.clientX - left) / width;
+        const y = (e.clientY - top) / height;
+        const tiltX = (y - 0.5) * 15;
+        const tiltY = (x - 0.5) * -15;
+        setTilt({ x: tiltX, y: tiltY });
+    };
+
+    return (
+        <div 
+            ref={cardRef}
+            className="project-card glass gradient-border hover-lift"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+            style={{
+                transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+                transition: tilt.x === 0 ? 'transform 0.5s ease' : 'none'
+            }}
+        >
+            <div style={{ transform: 'translateZ(30px)' }}>
+                <div className="project-header">
+                    <h3 className="project-title">{project.title}</h3>
+                    <div className="project-links">
+                        <a href={project.github} className="project-link"><FiGithub /></a>
+                        <a href={project.demo} className="project-link"><FiExternalLink /></a>
+                    </div>
+                </div>
+                <p className="project-description">{project.description}</p>
+                <ul className="project-features">
+                    {project.features.map((feature, idx) => <li key={idx}>{feature}</li>)}
+                </ul>
+                <div className="project-technologies">
+                    {project.technologies.map((tech, idx) => (
+                        <div key={idx} className="tech-tag">
+                            {tech.icon}
+                            <span>{tech.name}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+};
+
 export default Projects;
+

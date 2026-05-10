@@ -2,7 +2,9 @@ import { useRef, useEffect, useState } from 'react';
 import { FiAward, FiCode, FiTrendingUp } from 'react-icons/fi';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { animateCounter } from '../utils/animations';
+import techCircuit from '../assets/tech_circuit.png';
 import './About.css';
+
 
 const About = () => {
     const [ref, isVisible] = useScrollReveal({ threshold: 0.2 });
@@ -20,7 +22,11 @@ const About = () => {
 
     return (
         <section id="about" className="about section" ref={ref}>
+            <div className="about-bg-image">
+                <img src={techCircuit} alt="Tech Background" />
+            </div>
             <div className="container">
+
                 <h2 className="section-title">
                     <span className="text-gradient">About Me</span>
                 </h2>
