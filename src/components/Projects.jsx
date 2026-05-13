@@ -15,7 +15,7 @@ const Projects = () => {
     const projects = [
         {
             title: 'Advanced Virtual Assistant MERN Stack Smart AI',
-            category: 'AI',
+            categories: ['AI', 'MERN Stack'],
             description:
                 'Intelligence virtual assistant powered by Gemini AI and MERN stack. Features smart conversational replies, custom assistant image uploads, and secure authentication.',
             features: [
@@ -37,7 +37,7 @@ const Projects = () => {
         },
         {
             title: 'AI Powered Learning Management System + Student Hub',
-            category: 'AI',
+            categories: ['AI', 'MERN Stack'],
             description:
                 'Fully functional EdTech platform combining LMS + AI tools (Live & Deployed). Designed to help students learn, plan, and improve using AI.',
             features: [
@@ -60,7 +60,7 @@ const Projects = () => {
         },
         {
             title: 'Freelancing Bidding Platform',
-            category: 'MERN Stack',
+            categories: ['MERN Stack'],
             description:
                 'Full-featured freelance marketplace connecting clients with freelancers. Service-based job bidding system with real-time messaging, project management, and contract handling.',
             features: [
@@ -81,7 +81,7 @@ const Projects = () => {
 
     const filteredProjects = activeFilter === 'All' 
         ? projects 
-        : projects.filter(project => project.category === activeFilter || (activeFilter === 'MERN Stack' && project.category === 'MERN Stack'));
+        : projects.filter(project => project.categories.includes(activeFilter));
 
     return (
         <section id="projects" className="projects section" ref={ref}>
