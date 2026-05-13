@@ -1,5 +1,5 @@
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
-import { SiReact, SiJavascript, SiHtml5, SiCss3, SiNodedotjs, SiMongodb, SiExpress, SiGoogle } from 'react-icons/si';
+import { SiReact, SiJavascript, SiHtml5, SiCss3, SiNodedotjs, SiMongodb, SiExpress, SiGoogle, SiTailwindcss, SiOpenai } from 'react-icons/si';
 
 import { useRef, useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
@@ -32,23 +32,26 @@ const Projects = () => {
             demo: '#',
         },
         {
-            title: 'AI Powered Learning Management System',
+            title: 'AI Powered Learning Management System + Student Hub',
             description:
-                'A full-stack learning management platform featuring real-time course tracking, interactive student-teacher portals, and AI-driven content suggestions.',
+                'Fully functional EdTech platform combining LMS + AI tools (Live & Deployed). Designed to help students learn, plan, and improve using AI.',
             features: [
-                'Full Stack MERN App',
-                'Real-time Course Management',
-                'Interactive User Dashboards',
-                'AI Analysis & Recommendations',
+                'Course Creation & Management (Admin Panel)',
+                'Student Learning Dashboard',
+                'Video Lectures & Progress Tracking',
+                'Secure User Authentication (JWT-based)',
+                'AI Student Hub (Roadmap, Study Planner, Resume Analyzer, Quiz, Mistakes)',
             ],
             technologies: [
                 { name: 'React', icon: <SiReact /> },
                 { name: 'Node.js', icon: <SiNodedotjs /> },
-                { name: 'MongoDB', icon: <SiMongodb /> },
                 { name: 'Express', icon: <SiExpress /> },
+                { name: 'MongoDB', icon: <SiMongodb /> },
+                { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
+                { name: 'OpenAI API', icon: <SiOpenai /> },
             ],
             github: '#',
-            demo: '#',
+            demo: 'https://learning-management-system-nine-bay.vercel.app',
         },
         {
             title: 'Freelancing Bidding Platform',
