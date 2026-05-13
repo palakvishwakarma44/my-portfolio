@@ -29,7 +29,7 @@ const Projects = () => {
                 { name: 'Gemini AI', icon: <SiGoogle /> },
             ],
             github: '#',
-            demo: '#',
+            demo: 'https://virtual-assistant-frontend-qxbq.vercel.app',
         },
         {
             title: 'AI Powered Learning Management System + Student Hub',
@@ -69,7 +69,7 @@ const Projects = () => {
                 { name: 'JavaScript', icon: <SiJavascript /> },
             ],
             github: '#',
-            demo: '#',
+            demo: 'https://freelance-bidding-platform.vercel.app',
         },
     ];
 
