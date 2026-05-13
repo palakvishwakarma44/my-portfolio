@@ -136,7 +136,7 @@ const ProjectCard = ({ project }) => {
             style={{
                 transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
                 transition: tilt.x === 0 ? 'transform 0.5s ease' : 'none'
-            }}
+        >
             <div className="live-status">
                 <span className="pulse-dot"></span>
                 <span className="live-text">LIVE</span>
