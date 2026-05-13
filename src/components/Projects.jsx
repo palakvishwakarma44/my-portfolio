@@ -8,10 +8,14 @@ import './Projects.css';
 
 const Projects = () => {
     const [ref, isVisible] = useScrollReveal({ threshold: 0.1 });
+    const [activeFilter, setActiveFilter] = useState('All');
+
+    const categories = ['All', 'MERN Stack', 'AI', 'JavaScript'];
 
     const projects = [
         {
             title: 'Advanced Virtual Assistant MERN Stack Smart AI',
+            category: 'AI',
             description:
                 'Intelligence virtual assistant powered by Gemini AI and MERN stack. Features smart conversational replies, custom assistant image uploads, and secure authentication.',
             features: [
@@ -33,6 +37,7 @@ const Projects = () => {
         },
         {
             title: 'AI Powered Learning Management System + Student Hub',
+            category: 'MERN Stack',
             description:
                 'Fully functional EdTech platform combining LMS + AI tools (Live & Deployed). Designed to help students learn, plan, and improve using AI.',
             features: [
@@ -55,6 +60,7 @@ const Projects = () => {
         },
         {
             title: 'Freelancing Bidding Platform',
+            category: 'MERN Stack',
             description:
                 'Full-featured freelance marketplace connecting clients with freelancers. Service-based job bidding system with real-time messaging, project management, and contract handling.',
             features: [
@@ -73,6 +79,10 @@ const Projects = () => {
         },
     ];
 
+    const filteredProjects = activeFilter === 'All' 
+        ? projects 
+        : projects.filter(project => project.category === activeFilter || (activeFilter === 'MERN Stack' && project.category === 'MERN Stack'));
+
     return (
         <section id="projects" className="projects section" ref={ref}>
             <div className="container">
@@ -80,15 +90,28 @@ const Projects = () => {
                     <span className="text-gradient">Featured Projects</span>
                 </h2>
 
+                <div className="filter-container">
+                    {categories.map(cat => (
+                        <button 
+                            key={cat}
+                            className={`filter-btn ${activeFilter === cat ? 'active' : ''}`}
+                            onClick={() => setActiveFilter(cat)}
+                        >
+                            {cat}
+                        </button>
+                    ))}
+                </div>
+
                 <div className={`projects-grid ${isVisible ? 'stagger active' : 'stagger'}`}>
-                    {projects.map((project, idx) => (
-                        <ProjectCard key={idx} project={project} />
+                    {filteredProjects.map((project, idx) => (
+                        <ProjectCard key={project.title} project={project} />
                     ))}
                 </div>
             </div>
         </section>
     );
 };
+
 
 const ProjectCard = ({ project }) => {
     const cardRef = useRef(null);
@@ -114,7 +137,10 @@ const ProjectCard = ({ project }) => {
                 transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
                 transition: tilt.x === 0 ? 'transform 0.5s ease' : 'none'
             }}
-        >
+            <div className="live-status">
+                <span className="pulse-dot"></span>
+                <span className="live-text">LIVE</span>
+            </div>
             <div style={{ transform: 'translateZ(30px)' }}>
                 <div className="project-header">
                     <h3 className="project-title">{project.title}</h3>
