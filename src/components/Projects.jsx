@@ -10,7 +10,7 @@ const Projects = () => {
     const [ref, isVisible] = useScrollReveal({ threshold: 0.1 });
     const [activeFilter, setActiveFilter] = useState('All');
 
-    const categories = ['All', 'MERN Stack', 'AI', 'JavaScript'];
+    const categories = ['All', 'MERN Stack', 'AI'];
 
     const projects = [
         {
@@ -37,7 +37,7 @@ const Projects = () => {
         },
         {
             title: 'AI Powered Learning Management System + Student Hub',
-            category: 'MERN Stack',
+            category: 'AI',
             description:
                 'Fully functional EdTech platform combining LMS + AI tools (Live & Deployed). Designed to help students learn, plan, and improve using AI.',
             features: [
